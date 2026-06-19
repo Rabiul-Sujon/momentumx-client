@@ -2,6 +2,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/providers/AuthProvider";
+import Navbar from "@/components/shared/Navbar";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -18,6 +19,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-base-100 text-white">
         <AuthProvider>
+          <Navbar />
+           
           {children}
           <Toaster position="top-right" />
         </AuthProvider>
