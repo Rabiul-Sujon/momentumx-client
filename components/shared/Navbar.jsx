@@ -41,14 +41,14 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center font-black text-black text-sm">
-              MX
-            </div>
-            <span className="text-xl font-black tracking-tight">
-              Momentum<span className="text-primary">X</span>
-            </span>
-          </Link>
+           <Link href="/" className="flex items-center gap-2">
+           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center font-black text-black  text-sm">
+           MX
+           </div>
+           <span className="text-xl font-black tracking-tight">
+           Momentum<span className="text-primary">X</span>
+           </span>
+           </Link>
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">

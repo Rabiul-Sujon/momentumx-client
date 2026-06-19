@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/providers/AuthProvider";
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           <Navbar />
            
           {children}
+          <Footer />
           <Toaster position="top-right" />
         </AuthProvider>
       </body>
