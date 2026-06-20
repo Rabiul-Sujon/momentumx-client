@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-base-100 text-white">
         <AuthProvider>
           <Navbar />
-           
+         
           {children}
           <Footer />
           <Toaster position="top-right" />
