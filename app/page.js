@@ -1,7 +1,11 @@
+import Banner from "@/components/home/Banner";
+import FeaturedClasses from "@/components/home/FeaturedClasses";
+
 export default function Home() {
   return (
-    <div>
-      <h1>MomentumX</h1>
-    </div>
+     <main>
+      <Banner />
+      <FeaturedClasses />
+    </main>
   );
 }
