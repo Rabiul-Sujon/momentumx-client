@@ -62,16 +62,21 @@ export default function RegisterPage() {
         imageUrl = await uploadImage();
       }
 
-      await signUp.email({
+         const { error }=await signUp.email({
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        image: imageUrl,
-        callbackURL: '/',
+        image: imageUrl || '',
+        callbackURL: '/login',
       });
+       if (error) {
+      toast.error(error.message || 'Registration failed!');
+      setLoading(false);
+      return;
+    }
 
-      toast.success('Account created successfully!');
-      router.push('/');
+      toast.success('Account created successfully!Please login.');
+      router.push('/login');
     } catch (error) {
       toast.error(error.message || 'Registration failed!');
     } finally {
@@ -83,7 +88,7 @@ export default function RegisterPage() {
     try {
       await signIn.social({
         provider: 'google',
-        callbackURL: '/',
+        callbackURL:'http://localhost:3000/',
       });
     } catch (error) {
       toast.error('Google login failed!');

@@ -16,22 +16,23 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await signIn.email({
-        email: formData.email,
-        password: formData.password,
-        callbackURL: '/',
-      });
-      toast.success('Login successful!');
-      router.push('/');
-    } catch (error) {
-      toast.error(error.message || 'Login failed!');
-    } finally {
-      setLoading(false);
-    }
-  };
+  e.preventDefault();
+  setLoading(true);
+  try {
+    await signIn.email({
+      email: formData.email,
+      password: formData.password,
+      callbackURL: '/',
+    });
+    toast.success('Login successful!');
+    router.push('/');
+    router.refresh();
+  } catch (error) {
+    toast.error(error.message || 'Login failed!');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleGoogleLogin = async () => {
     try {
