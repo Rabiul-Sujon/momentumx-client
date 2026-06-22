@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Banner() {
   return (
@@ -122,9 +123,11 @@ export default function Banner() {
 
               {/* Main Image */}
               <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10">
-                <img
-                  src="https://res.cloudinary.com/dqg9ygns9/image/upload/v1781925306/Bodybuilder_ocobdr.png"
-                  className="w-full h-full object-cover object-center"
+                <Image
+                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1781925306/Bodybuilder_ocobdr.png`}
+                   alt="Bodybuilder"
+    fill
+    className="object-cover object-center"
                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-base-100/60 via-transparent to-transparent"></div>

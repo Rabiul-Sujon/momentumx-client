@@ -11,8 +11,8 @@ export default function DashboardLayout({ children }) {
   const { user, isPending } = useAuth();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-   console.log('user:', user);
-  console.log('isPending:', isPending);
+  //  console.log('user:', user);
+  // console.log('isPending:', isPending);
 
   useEffect(() => {
     if (!isPending && !user) {

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const userLinks = [
   { href: '/dashboard/user', label: 'Overview', icon: '📊' },
-  { href: '/dashboard/user/bookings', label: 'Booked Classes', icon: '📅' },
+  { href: '/dashboard/user/booked-classes', label: 'Booked Classes', icon: '📅' }, // ✅ fixed
   { href: '/dashboard/user/apply-trainer', label: 'Apply as Trainer', icon: '📝' },
   { href: '/dashboard/user/favorites', label: 'Favorite Classes', icon: '❤️' },
 ];
@@ -26,9 +26,9 @@ const adminLinks = [
   { href: '/dashboard/admin/applied-trainers', label: 'Applied Trainers', icon: '📋' },
   { href: '/dashboard/admin/manage-trainers', label: 'Manage Trainers', icon: '👨‍🏫' },
   { href: '/dashboard/admin/manage-classes', label: 'Manage Classes', icon: '📚' },
-  { href: '/dashboard/admin/add-forum-post', label: 'Add Forum Post', icon: '✏️' },
+  { href: '/dashboard/admin/add-post', label: 'Add Forum Post', icon: '✏️' }, // ✅ fixed
   { href: '/dashboard/admin/transactions', label: 'Transactions', icon: '💰' },
-  { href: '/dashboard/admin/manage-forum', label: 'Forum Posts', icon: '🗂️' },
+  { href: '/dashboard/admin/manage-posts', label: 'Forum Posts', icon: '🗂️' }, // ✅ fixed
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
