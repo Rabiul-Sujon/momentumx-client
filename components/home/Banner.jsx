@@ -124,11 +124,13 @@ export default function Banner() {
               {/* Main Image */}
               <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10">
                 <Image
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1781925306/Bodybuilder_ocobdr.png`}
-                   alt="Bodybuilder"
-    fill
-    className="object-cover object-center"
-                />
+                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1781925306/Bodybuilder_ocobdr.png`}
+                alt="Bodybuilder"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top"
+                loading="eager"
+                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-base-100/60 via-transparent to-transparent"></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-base-100/20 via-transparent to-transparent"></div>
