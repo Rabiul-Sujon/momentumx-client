@@ -17,7 +17,7 @@ export default function ManageClassesPage() {
   // Approve class
   const approveMutation = useMutation({
     mutationFn: (classId) =>
-      axios.put(`/api/classes/${classId}/status`, { status: 'approved' }),
+      axios.put(`/api/classes/status/${classId}`, { status: 'approved' }),
     onSuccess: () => {
       toast.success('Class approved successfully!');
       queryClient.invalidateQueries(['admin-classes']);
@@ -28,7 +28,7 @@ export default function ManageClassesPage() {
   // Reject class
   const rejectMutation = useMutation({
     mutationFn: (classId) =>
-      axios.put(`/api/classes/${classId}/status`, { status: 'rejected' }),
+      axios.put(`/api/classes/status/${classId}`, { status: 'rejected' }),
     onSuccess: () => {
       toast.success('Class rejected');
       queryClient.invalidateQueries(['admin-classes']);

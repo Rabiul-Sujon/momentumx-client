@@ -16,8 +16,8 @@ const trainerLinks = [
   { href: '/dashboard/trainer', label: 'Overview', icon: '📊' },
   { href: '/dashboard/trainer/add-class', label: 'Add Class', icon: '➕' },
   { href: '/dashboard/trainer/my-classes', label: 'My Classes', icon: '📚' },
-  { href: '/dashboard/trainer/add-forum-post', label: 'Add Forum Post', icon: '✏️' },
-  { href: '/dashboard/trainer/my-forum-posts', label: 'My Forum Posts', icon: '📝' },
+  { href: '/dashboard/trainer/add-post', label: 'Add Forum Post', icon: '✏️' },
+  { href: '/dashboard/trainer/my-posts', label: 'My Forum Posts', icon: '📝' },
 ];
 
 const adminLinks = [

@@ -28,74 +28,72 @@ export default function ForumPostDetailsPage() {
     queryFn: () => axios.get(`/api/forum/${id}`).then((r) => r.data),
   });
 
+  // Fetch comments
+const { data: comments } = useQuery({
+  queryKey: ['comments', id],
+  queryFn: () => axios.get(`/api/comments/${id}`).then(r => r.data),
+});
+
   // Post comment
-  const commentMutation = useMutation({
-    mutationFn: (text) =>
-      axios.post(`/api/forum/${id}/comments`, { text }),
-    onSuccess: () => {
-      toast.success("Comment posted!");
-      setComment("");
-      queryClient.invalidateQueries(["forum-post", id]);
-    },
-    onError: (err) =>
-      toast.error(err?.response?.data?.message || "Failed to post comment"),
-  });
+const commentMutation = useMutation({
+  mutationFn: (text) => axios.post('/api/comments', { postId: id, text }),
+  onSuccess: () => {
+    toast.success('Comment posted!');
+    setComment('');
+    queryClient.invalidateQueries(['forum-post', id]);
+  },
+  onError: (err) => toast.error(err?.response?.data?.message || 'Failed to post comment'),
+});
 
   // Edit comment
   const editMutation = useMutation({
-    mutationFn: ({ commentId, text }) =>
-      axios.put(`/api/forum/${id}/comments/${commentId}`, { text }),
-    onSuccess: () => {
-      toast.success("Comment updated!");
-      setEditingId(null);
-      queryClient.invalidateQueries(["forum-post", id]);
-    },
-    onError: () => toast.error("Failed to update comment"),
-  });
+  mutationFn: ({ commentId, text }) => axios.put(`/api/comments/${commentId}`, { text }),
+  onSuccess: () => {
+    toast.success('Comment updated!');
+    setEditingId(null);
+    queryClient.invalidateQueries(['forum-post', id]);
+  },
+  onError: () => toast.error('Failed to update comment'),
+});
 
   // Delete comment
-  const deleteMutation = useMutation({
-    mutationFn: (commentId) =>
-      axios.delete(`/api/forum/${id}/comments/${commentId}`),
-    onSuccess: () => {
-      toast.success("Comment deleted");
-      queryClient.invalidateQueries(["forum-post", id]);
-    },
-    onError: () => toast.error("Failed to delete comment"),
-  });
+ const deleteMutation = useMutation({
+  mutationFn: (commentId) => axios.delete(`/api/comments/${commentId}`),
+  onSuccess: () => {
+    toast.success('Comment deleted');
+    queryClient.invalidateQueries(['forum-post', id]);
+  },
+  onError: () => toast.error('Failed to delete comment'),
+});
 
   // Reply
   const replyMutation = useMutation({
-    mutationFn: ({ commentId, text }) =>
-      axios.post(`/api/forum/${id}/comments/${commentId}/reply`, { text }),
-    onSuccess: () => {
-      toast.success("Reply posted!");
-      setReplyingTo(null);
-      setReplyText("");
-      queryClient.invalidateQueries(["forum-post", id]);
-    },
-    onError: (err) =>
-      toast.error(err?.response?.data?.message || "Failed to post reply"),
-  });
+  mutationFn: ({ commentId, text }) => axios.post(`/api/comments/reply/${commentId}`, { text }),
+  onSuccess: () => {
+    toast.success('Reply posted!');
+    setReplyingTo(null);
+    setReplyText('');
+    queryClient.invalidateQueries(['forum-post', id]);
+  },
+  onError: (err) => toast.error(err?.response?.data?.message || 'Failed to post reply'),
+});
 
   // Like
-  const likeMutation = useMutation({
-    mutationFn: () => axios.post(`/api/forum/${id}/like`),
-    onSuccess: () => queryClient.invalidateQueries(["forum-post", id]),
-    onError: (err) =>
-      toast.error(err?.response?.data?.message || "Failed to like"),
-  });
+ const likeMutation = useMutation({
+  mutationFn: () => axios.put(`/api/forum/vote/${id}`, { type: 'like' }),
+  onSuccess: () => queryClient.invalidateQueries(['forum-post', id]),
+  onError: (err) => toast.error(err?.response?.data?.message || 'Failed to like'),
+});
 
   // Dislike
-  const dislikeMutation = useMutation({
-    mutationFn: () => axios.post(`/api/forum/${id}/dislike`),
-    onSuccess: () => queryClient.invalidateQueries(["forum-post", id]),
-    onError: (err) =>
-      toast.error(err?.response?.data?.message || "Failed to dislike"),
-  });
+ const dislikeMutation = useMutation({
+  mutationFn: () => axios.put(`/api/forum/vote/${id}`, { type: 'dislike' }),
+  onSuccess: () => queryClient.invalidateQueries(['forum-post', id]),
+  onError: (err) => toast.error(err?.response?.data?.message || 'Failed to dislike'),
+});
 
-  const hasLiked = post?.likes?.includes(user?.id);
-  const hasDisliked = post?.dislikes?.includes(user?.id);
+  const hasLiked = post?.likes?.includes(user?.email);
+  const hasDisliked = post?.dislikes?.includes(user?.email);
 
   if (isLoading) {
     return (
@@ -207,7 +205,7 @@ export default function ForumPostDetailsPage() {
                 if (!user) return router.push("/login");
                 likeMutation.mutate();
               }}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer hover:brightness-150"
               style={{
                 background: hasLiked
                   ? "rgba(0,212,255,0.15)"
@@ -227,7 +225,7 @@ export default function ForumPostDetailsPage() {
                 if (!user) return router.push("/login");
                 dislikeMutation.mutate();
               }}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer hover:brightness-150"
               style={{
                 background: hasDisliked
                   ? "rgba(123,47,255,0.15)"
@@ -253,7 +251,7 @@ export default function ForumPostDetailsPage() {
             }}
           >
             <h2 className="text-white font-bold text-xl mb-6">
-              Comments ({post.comments?.length || 0})
+              Comments ({comments?.length || 0})
             </h2>
 
             {/* Add comment */}
@@ -277,7 +275,7 @@ export default function ForumPostDetailsPage() {
                     commentMutation.mutate(comment.trim());
                   }}
                   disabled={commentMutation.isPending}
-                  className="self-end px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
+                  className="self-end px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all cursor-pointer hover:brightness-150"
                   style={{
                     background: "linear-gradient(135deg, #00D4FF, #7B2FFF)",
                   }}
@@ -297,7 +295,7 @@ export default function ForumPostDetailsPage() {
 
             {/* Comments list */}
             <div className="flex flex-col gap-6">
-              {post.comments?.length === 0 && (
+              {comments?.length === 0 && (
                 <p
                   className="text-sm"
                   style={{ color: "rgba(255,255,255,0.3)" }}
@@ -305,7 +303,7 @@ export default function ForumPostDetailsPage() {
                   No comments yet. Be the first!
                 </p>
               )}
-              {post.comments?.map((c) => (
+              {comments?.map((c) => (
                 <div key={c._id} className="flex flex-col gap-2">
                   {/* Comment */}
                   <div

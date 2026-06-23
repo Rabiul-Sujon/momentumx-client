@@ -103,11 +103,10 @@ function ForumPageInner() {
               >
                 {/* Image */}
                 <div className="relative w-full h-48">
-                  <Image
+                  <img
                     src={post.image}
                     alt={post.title}
-                    fill
-                    className="object-cover"
+                    className="w-full h-full object-cover"
                   />
                   {/* Role badge */}
                   <span
