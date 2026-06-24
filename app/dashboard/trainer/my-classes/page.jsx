@@ -147,12 +147,12 @@ export default function MyClassesPage() {
                         >
                           View Students
                         </button>
-                        <Link
-                          href={`/dashboard/trainer/edit-class/${cls._id}`}
+                        <button
+                         onClick={() => setSelectedClass(cls)}
                           className="px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                        >
-                          Update
-                        </Link>
+                          >
+                         Update
+                        </button>
                         <button
                           onClick={() => handleDelete(cls._id)}
                           className="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
@@ -214,6 +214,63 @@ export default function MyClassesPage() {
           <p className="text-center text-neutral/60 py-8">No students enrolled yet.</p>
         )}
       </Modal>
+
+      {/* Update Modal */}
+<Modal
+  isOpen={!!selectedClass}
+  onClose={() => setSelectedClass(null)}
+  title="Update Class"
+>
+  {selectedClass && (
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      updateMutation.mutate({
+        classId: selectedClass._id,
+        data: {
+          name: formData.get('name'),
+          price: formData.get('price'),
+          description: formData.get('description'),
+        }
+      });
+      setSelectedClass(null);
+    }} className="space-y-4">
+      <div>
+        <label className="text-sm text-neutral/60 mb-1 block">Class Name</label>
+        <input
+          name="name"
+          defaultValue={selectedClass.name}
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-primary"
+        />
+      </div>
+      <div>
+        <label className="text-sm text-neutral/60 mb-1 block">Price ($)</label>
+        <input
+          name="price"
+          type="number"
+          defaultValue={selectedClass.price}
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-primary"
+        />
+      </div>
+      <div>
+        <label className="text-sm text-neutral/60 mb-1 block">Description</label>
+        <textarea
+          name="description"
+          defaultValue={selectedClass.description}
+          rows={3}
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-primary resize-none"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full py-2.5 rounded-xl text-black font-bold text-sm"
+        style={{ background: 'linear-gradient(135deg, #00D4FF, #7B2FFF)' }}
+      >
+        Update Class
+      </button>
+    </form>
+  )}
+</Modal>
     </div>
   );
 }

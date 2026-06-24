@@ -6,7 +6,7 @@ import axios from '@/lib/axios';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-const categories = ['All', 'Yoga', 'Cardio', 'HIIT', 'Strength', 'Pilates', 'Weights', 'Dance', 'Boxing'];
+const categories = ['All', 'yoga', 'cardio', 'hiit', 'strength', 'pilates', 'weights', 'dance', 'boxing'];
 
 const categoryColors = {
   Yoga: 'text-green-400 bg-green-400/10',
