@@ -14,6 +14,9 @@ const dmSans = DM_Sans({
 export const metadata = {
   title: "MomentumX | Fitness & Gym Management Platform",
   description: "Discover fitness classes, book sessions, and track your fitness journey with MomentumX.",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
