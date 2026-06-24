@@ -69,8 +69,12 @@ function CheckoutForm({ cls }) {
       // 3. Confirm booking on backend
       await axios.post("/api/payments/confirm", {
         classId: cls._id,
-        paymentIntentId: result.paymentIntent.id,
-        amount: cls.price,
+         className: cls.name,
+        trainerName: cls.trainerName,
+         schedule: cls.schedule,
+         amount: cls.price,
+        transactionId: result.paymentIntent.id,
+        
       });
 
       toast.success("Payment successful! Class booked.");

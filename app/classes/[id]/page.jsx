@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import axios from "@/lib/axios";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ClassDetailsPage() {
   const { id } = useParams();
@@ -29,37 +29,53 @@ export default function ClassDetailsPage() {
   });
 
   // Check if already favorited
-  const { data: favoriteCheck } = useQuery({
-    queryKey: ["favorite-check", id],
-    queryFn: () => axios.get(`/api/favorites/check/${id}`).then((r) => r.data),
-    enabled: !!user,
-  });
+const { data: favoriteCheck } = useQuery({
+  queryKey: ["favorite-check", id],
+  queryFn: () => axios.get(`/api/favorites/check/${id}`).then((r) => r.data),
+  enabled: !!user,
+});
 
-  const isBooked = bookingCheck?.booked;
-  const isFavorited = favoriteCheck?.favorited;
-  const favoriteId = favoriteCheck?.favoriteId;
+console.log("favoriteCheck:", favoriteCheck);
+const isBooked = bookingCheck?.booked; 
+const isFavorited = favoriteCheck?.favorited;
+const favoriteId = favoriteCheck?.favoriteId;
 
-  // Add favorite mutation
-  const addFavoriteMutation = useMutation({
-    mutationFn: () => axios.post("/api/favorites", { classId: id }),
-    onSuccess: () => {
-      toast.success("Added to favorites!");
-      queryClient.invalidateQueries(["favorite-check", id]);
-    },
-    onError: (err) => {
-      toast.error(err?.response?.data?.message || "Failed to add favorite");
-    },
-  });
+  
+ // Add favorite mutation
+const addFavoriteMutation = useMutation({
+  mutationFn: () => axios.post("/api/favorites", {
+    classId: cls._id,
+    className: cls.name,
+    trainerName: cls.trainerName,
+    category: cls.category,
+    price: cls.price,
+    image: cls.image,
+  }),
+  onSuccess: () => {
+    toast.success("Added to favorites!");
+    queryClient.invalidateQueries(["favorite-check", id]);
+  },
+  onError: (err) => {
+    toast.error(err?.response?.data?.message || "Failed to add favorite");
+  },
+});
 
-  // Remove favorite mutation
-  const removeFavoriteMutation = useMutation({
-    mutationFn: () => axios.delete(`/api/favorites/${favoriteId}`),
-    onSuccess: () => {
-      toast.success("Removed from favorites");
-      queryClient.invalidateQueries(["favorite-check", id]);
-    },
-    onError: () => toast.error("Failed to remove favorite"),
-  });
+ // Remove favorite mutation
+const removeFavoriteMutation = useMutation({
+  mutationFn: async () => {
+    if (!favoriteId) {
+      throw new Error("Favorite ID not found");
+    }
+    return axios.delete(`/api/favorites/${favoriteId}`);
+  },
+  onSuccess: () => {
+    toast.success("Removed from favorites!");
+    queryClient.invalidateQueries(["favorite-check", id]);
+  },
+  onError: (err) => {
+    toast.error(err?.response?.data?.message || "Failed to remove favorite");
+  },
+});
 
   const handleBookNow = () => {
     if (!user) return router.push("/login");
@@ -67,14 +83,19 @@ export default function ClassDetailsPage() {
     router.push(`/payment?classId=${id}`);
   };
 
-  const handleFavorite = () => {
-    if (!user) return router.push("/login");
-    if (isFavorited) {
-      removeFavoriteMutation.mutate();
-    } else {
-      addFavoriteMutation.mutate();
+ const handleFavorite = () => {
+  if (!user) return router.push("/login");
+  
+  if (isFavorited) {
+    if (!favoriteId) {
+      toast.error("Cannot remove favorite: ID not found");
+      return;
     }
-  };
+    removeFavoriteMutation.mutate();
+  } else {
+    addFavoriteMutation.mutate();
+  }
+};
 
   if (isLoading) {
     return (
@@ -113,7 +134,7 @@ export default function ClassDetailsPage() {
         >
           {/* Image */}
           <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,212,255,0.15)" }}>
-            <Image
+            <img
               src={cls.image}
               alt={cls.name}
               className="w-full h-80 lg:h-full object-cover"

@@ -3,11 +3,12 @@
 import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 import axios from "@/lib/axios";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function ForumPostDetailsPage() {
   const { id } = useParams();
@@ -144,12 +145,11 @@ const commentMutation = useMutation({
         >
           {/* Image */}
           <div className="relative w-full h-72 rounded-2xl overflow-hidden mb-8">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
+         <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-full object-cover"
+          />
           </div>
 
           {/* Meta */}
