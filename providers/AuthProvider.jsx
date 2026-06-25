@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
           setDbUser(res.data);
         } catch (error) {
           console.error('Error fetching user profile:', error);
+          setDbUser(null);
         } finally {
           setUserLoading(false);
         }
