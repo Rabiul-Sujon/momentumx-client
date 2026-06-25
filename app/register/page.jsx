@@ -88,7 +88,7 @@ export default function RegisterPage() {
     try {
       await signIn.social({
         provider: 'google',
-        callbackURL:'http://localhost:3000/',
+        callbackURL: typeof window !== 'undefined' ? window.location.origin : 'https://momentumx-client.vercel.app',
       });
     } catch (error) {
       toast.error('Google login failed!');
