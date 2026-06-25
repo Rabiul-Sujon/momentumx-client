@@ -60,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     ...session?.user,
     role: dbUser.role,
     status: dbUser.status,
+     image: dbUser.image || session?.user?.image || '',
   } : session?.user || null;
 
   return (

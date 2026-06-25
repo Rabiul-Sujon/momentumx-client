@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
@@ -95,11 +94,9 @@ export default function Navbar() {
                 <div tabIndex={0} role="button" className="flex items-center gap-2 cursor-pointer">
                   <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-primary">
                     {user.image ? (
-                      <Image
+                      <img
                         src={user.image}
                         alt={user.name}
-                        width={36}
-                        height={36}
                         className="object-cover w-full h-full"
                       />
                     ) : (
@@ -194,15 +191,13 @@ export default function Navbar() {
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-primary">
                       {user.image ? (
-                        <Image
+                        <img
                           src={user.image}
                           alt={user.name}
-                          width={32}
-                          height={32}
                           className="object-cover w-full h-full"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-black font-bold text-xs">
+                        <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-black font-bold text-sm">
                           {user.name?.charAt(0).toUpperCase()}
                         </div>
                       )}
