@@ -19,11 +19,16 @@ export default function LoginPage() {
   e.preventDefault();
   setLoading(true);
   try {
-    await signIn.email({
+     const { error } = await signIn.email({
       email: formData.email,
       password: formData.password,
       callbackURL: '/',
     });
+if (error) {
+      toast.error(error.message || 'Invalid credentials!');
+      return;
+    }
+
     toast.success('Login successful!');
     router.push('/');
     router.refresh();
@@ -38,7 +43,8 @@ export default function LoginPage() {
     try {
       await signIn.social({
         provider: 'google',
-        callbackURL: typeof window !== 'undefined' ? window.location.origin : 'https://momentumx-client.vercel.app',
+        // callbackURL: typeof window !== 'undefined' ? window.location.origin : 'https://momentumx-client.vercel.app',
+        callbackURL: `${window.location.origin}/`,
         
       });
     } catch (error) {
