@@ -124,7 +124,7 @@ export default function Banner() {
               {/* Main Image */}
               <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10">
                 <Image
-                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1781925306/Bodybuilder_ocobdr.png`}
+                src="https://res.cloudinary.com/dqg9ygns9/image/upload/v1782614839/huge-shirtless-bearded-bodybuilder-with-sporty-woman-azure-sportswear-posing-natural-light-near-window_i32pcn.jpg"
                 alt="Bodybuilder"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

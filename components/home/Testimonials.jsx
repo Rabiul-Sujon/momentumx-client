@@ -6,28 +6,28 @@ const testimonials = [
   {
     name: 'Sarah Johnson',
     role: 'Yoga Enthusiast',
-    avatar: '👩',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
     rating: 5,
     text: 'MomentumX completely transformed my fitness routine. The yoga classes are incredible and the trainers are so supportive!',
   },
   {
     name: 'Mike Chen',
     role: 'HIIT Athlete',
-    avatar: '👨',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
     rating: 5,
     text: 'I have tried many fitness platforms but MomentumX stands out. The booking system is seamless and classes are top-notch.',
   },
   {
     name: 'Emily Rodriguez',
     role: 'Weight Training',
-    avatar: '👩',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
     rating: 5,
     text: 'The community here is amazing! I have made so many friends and achieved goals I never thought possible.',
   },
   {
     name: 'David Kim',
     role: 'Cardio Runner',
-    avatar: '👨',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
     rating: 5,
     text: 'Best investment I made for my health. The trainers are certified professionals who really care about your progress.',
   },
@@ -87,9 +87,11 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-lg">
-                  {testimonial.avatar}
-                </div>
+                <img
+  src={testimonial.avatar}
+  alt={testimonial.name}
+  className="w-10 h-10 rounded-full object-cover"
+/>
                 <div>
                   <p className="text-white font-bold text-sm">{testimonial.name}</p>
                   <p className="text-neutral text-xs">{testimonial.role}</p>
