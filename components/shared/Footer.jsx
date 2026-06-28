@@ -10,14 +10,22 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            {/* Logo */}
+           <Link href="/">
+              <img
+               src="https://res.cloudinary.com/dqg9ygns9/image/upload/v1782638200/momentumx.logo_q4cr35.png"
+               alt="MomentumX"
+               className="h-30 w-auto object-contain -mt-10 -mb-6"
+               />
+           </Link>
+            {/* <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center font-black text-black text-sm">
                 MX
               </div>
               <span className="text-xl font-black tracking-tight">
                 Momentum<span className="text-primary">X</span>
               </span>
-            </Link>
+            </Link> */}
             <p className="text-neutral text-sm leading-relaxed max-w-xs">
               Your ultimate fitness management platform. Discover classes, book sessions, and track your fitness journey with MomentumX.
             </p>
@@ -72,10 +80,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4 -ml-10">
               Quick Links
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 -ml-10">
               {[
                 { href: '/', label: 'Home' },
                 { href: '/classes', label: 'All Classes' },
@@ -102,7 +110,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-neutral">
-                <span className="mt-0.5">📍</span>
+                <span className="mt-0.5">🏠</span>
                 <span>123 Fitness Street, Dhaka, Bangladesh</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-neutral">
