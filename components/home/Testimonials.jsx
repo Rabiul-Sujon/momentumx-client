@@ -8,28 +8,28 @@ const testimonials = [
     role: 'Yoga Enthusiast',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
     rating: 5,
-    text: 'MomentumX completely transformed my fitness routine. The yoga classes are incredible and the trainers are so supportive!',
+    text: '"MomentumX completely transformed my fitness routine. The yoga classes are incredible and the trainers are so supportive!"',
   },
   {
     name: 'Mike Chen',
     role: 'HIIT Athlete',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
     rating: 5,
-    text: 'I have tried many fitness platforms but MomentumX stands out. The booking system is seamless and classes are top-notch.',
+    text: '"I have tried many fitness platforms but MomentumX stands out. The booking system is seamless and classes are top-notch."',
   },
   {
     name: 'Emily Rodriguez',
     role: 'Weight Training',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
     rating: 5,
-    text: 'The community here is amazing! I have made so many friends and achieved goals I never thought possible.',
+    text: '"The community here is amazing! I have made so many friends and achieved goals I never thought possible."',
   },
   {
     name: 'David Kim',
     role: 'Cardio Runner',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100',
     rating: 5,
-    text: 'Best investment I made for my health. The trainers are certified professionals who really care about your progress.',
+    text: '"Best investment I made for my health. The trainers are certified professionals who really care about your progress."',
   },
 ];
 
@@ -82,7 +82,7 @@ export default function Testimonials() {
 
               {/* Text */}
               <p className="text-neutral text-sm leading-relaxed mb-6">
-                "{testimonial.text}"
+                {testimonial.text}
               </p>
 
               {/* Author */}
